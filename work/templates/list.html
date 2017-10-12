@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block  content %}
+      <!--TODO css 1:create paging -->
+
+
+
+      <div class=""> <!--TODO css 1:push button to the write 20mm -->
+            <a href="/create_work"><button type="button" class="btn btn-primary">اظافه کردن کار جدید</button></a>
+            <br>
+            <br>
+            <br>
+      </div>
+
+      <div class="raw col-md-12"><!--TODO django 1:create button for delete any query -->
+        <table class="table table-sm table-inverse">
+          <thead>
+            <tr >
+              <th class="col-md-0 bg-info">#</th>
+              <th class="col-md-2 bg-primary">عنوان </th>
+              <th class="col-md-2 bg-success">تاریخ شروع </th>
+              <th class="col-md-6 bg-warning">مطلب</th>
+              <th class="col-md-2 bg-danger">وضعیت انجام </th>
+              <th class="col-md-1 bg-primary">حذف </th>
+            </tr>
+          </thead>
+          <tbody>
+             {% for work in todowork  %}
+            <tr>
+              <th class="col-md-0" scope="row">{{forloop.counter}}</th>
+              <td class="col-md-2" >{{work.title}}</td>
+              <td class="col-md-2">{{work.date_end}}</td>
+              <td class="col-md-6">{{work.content}}</td>
+              {% if work.done %}
+                  <td class="col-md-1"><a href="done/{{work.id}}" >انجام شده </a></td>
+              {% else %}
+                  <td class="col-md-1"><a href="done/{{work.id}}" >انجام نشده </a></td>
+
+
+              {% endif %}
+              <td class="col-md-1"><a class="btn btn-primary" href="delete/{{work.id}}" > حذف </a></td>
+
+            </tr>
+
+            {% endfor %}
+          </tbody>
+
+        </table>
+
+
+      </div>
+
+{% endblock %}
